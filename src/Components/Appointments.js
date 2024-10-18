@@ -19,7 +19,7 @@ import { Card } from 'primereact/card';
 
 export default function Appointments() {
     const optimumUsersRef = useRef(null);
-    const {accessToken, setAccessToken, refreshToken, setIsLoggedIn, appointments, setAppointments, users} = useContext(context);
+    const {accessToken, setAccessToken, refreshToken, setIsLoggedIn, appointments, setAppointments, users, logout} = useContext(context);
     const [seach, setSearch] = useState("");
     const [userNames, setUserNames] = useState([]);
     const [isLoading, setIsLoading] = useState({text: "", visible: false});
@@ -183,11 +183,13 @@ export default function Appointments() {
 
     const searchBar = () => {
         return (
-            <div>
+            <div className='search-add-skill-container'>
                 <IconField iconPosition="left">
                     <InputIcon className="pi pi-search" />
                     <InputText className='search-bar-input' value={seach} onChange={onSearchChange} placeholder="Search" />
                 </IconField>
+
+                <Button label="Log out" icon="pi pi-sign-out" size="small" onClick={logout}/>
             </div>
         );
     };

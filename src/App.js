@@ -22,6 +22,12 @@ function App() {
   const [users, setUsers] = useState([]);
   const [skills, setSkills] = useState([]);
 
+  function logout(){
+    secureLocalStorage.removeItem('email');
+    secureLocalStorage.removeItem('password');
+    window.location.reload();
+  }
+
   useEffect(()=>{
     const email = secureLocalStorage.getItem("email");
     const password = secureLocalStorage.getItem("password");
@@ -57,7 +63,8 @@ function App() {
       users,
       setUsers,
       skills,
-      setSkills
+      setSkills,
+      logout
     }}>
       <div className="App">
         {
