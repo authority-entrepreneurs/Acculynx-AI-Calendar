@@ -1,0 +1,45 @@
+.search-bar-input{
+    width: 30%;
+}
+
+.loading-dialog .p-dialog-header-icons{
+    display: none;
+}
+
+.assigned-optimum-users-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.optimum-users-container > div:first-of-type{
+    max-height: 40vh;
+    overflow-y: auto;
+    padding: 0 .5rem;
+}
+
+.optimum-user{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: .5rem;
+    margin: .5rem 0;
+    border-radius: 5px;
+}
+
+.optimum-user > p{
+    margin: 0;
+}
+
+.optimum-user-name{
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.optimum-user-distance{
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+.optimum-user-skills-match{
+    font-size: .8rem;
+    font-weight: 500;
+}

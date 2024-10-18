@@ -1,0 +1,29 @@
+.dashboard{
+    width: 100%;
+    height: 100%;
+    padding: 2rem 2rem 0 2rem;
+    background: #F8FEFF;
+}
+
+div[data-pc-section="panelcontainer"]{
+    background: #F8FEFF;
+}
+
+.tab-container > div > div{
+    border-radius: 1rem;
+    box-shadow: 0px 4px 4px 0px #0000000D;
+}
+
+.p-tabview-panels{
+    padding: 0;
+}
+
+.tab-heading{
+    color: #00808E;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}

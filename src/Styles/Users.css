@@ -1,0 +1,35 @@
+.skill{
+    margin: 0 2px;
+}
+
+.search-add-skill-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-add-skill-container > div:first-of-type{
+    width: 50%;
+}
+
+.search-add-skill-container .search-bar-input{
+    width: 60%;
+}
+
+.add-skill-container .p-dialog-header{
+    padding: 0;
+}
+
+.add-skill-container .p-dialog-content{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    padding-top: 2rem;
+    gap: 1rem;
+}
+
+.add-skill-container .p-dialog-content > .p-float-label,
+.add-skill-container .p-dialog-content > .p-float-label > .p-inputtext{
+    width: 100%;
+}
