@@ -65,9 +65,9 @@
 
     .login-cred-container,
     .login-button-container{
-        margin-top: 1.5rem;
+        margin-top: 2rem;
         margin-bottom: 0;
-        gap: 1rem;
+        gap: 1.7rem;
     }
 }
 

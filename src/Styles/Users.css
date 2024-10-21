@@ -43,6 +43,12 @@
         padding: 4px 4px 4px 30px;
     }
 
+    .text-input,
+    .dropdown-input > span,
+    .multiselect-input .p-multiselect-items-label{
+        padding: 4px;
+    }
+
     .button{
         padding: 4px 10px;
     }
@@ -53,7 +59,8 @@
         padding: .4rem;
     }
 
-    .p-component{
+    .p-component,
+    .dropdown-input > span{
         font-size: .6rem;
     }
 
@@ -88,6 +95,12 @@
         padding: 6px 6px 6px 30px;
     }
 
+    .text-input,
+    .dropdown-input > span,
+    .multiselect-input .p-multiselect-items-label{
+        padding: 6px;
+    }
+
     .button{
         padding: 6px 10px;
     }
@@ -98,7 +111,8 @@
         padding: .6rem;
     }
 
-    .p-component{
+    .p-component,
+    .dropdown-input > span{
         font-size: .7rem;
     }
 
@@ -133,6 +147,12 @@
         padding: 8px 8px 8px 30px;
     }
 
+    .text-input,
+    .dropdown-input > span,
+    .multiselect-input .p-multiselect-items-label{
+        padding: 8px;
+    }
+
     .button{
         padding: 8px 12px;
     }
@@ -143,7 +163,8 @@
         padding: .6rem;
     }
 
-    .p-component{
+    .p-component,
+    .dropdown-input > span{
         font-size: .7rem;
     }
 
@@ -177,6 +198,12 @@
     .search-bar-input{
         padding: 10px 10px 10px 35px;
     }
+    
+    .text-input,
+    .dropdown-input > span,
+    .multiselect-input .p-multiselect-items-label{
+        padding: 10px;
+    }
 
     .button{
         padding: 10px 16px;
@@ -188,7 +215,8 @@
         padding: .9rem;
     }
 
-    .p-component{
+    .p-component,
+    .dropdown-input > span{
         font-size: .9rem;
     }
     

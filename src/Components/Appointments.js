@@ -205,13 +205,14 @@ export default function Appointments() {
     };
 
     const textEditor = (options) => {
-        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+        return <InputText className='text-input' type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
     };
 
     const dropdownEditor = (options) => {
         return (
             <div className='assigned-optimum-users-container'>
                 <Dropdown
+                    className='dropdown-input'
                     value={options.value}
                     options={userNames}
                     filter
@@ -220,7 +221,7 @@ export default function Appointments() {
                 />
 
                 <div>
-                    <Button type="button" icon="pi pi-users" size="small" loading={isOptimumLoading} label="Optimum Users" onClick={(e)=>showOptimumUsers(e, options.rowData)} />
+                    <Button type="button" className='button' icon="pi pi-users" size="small" loading={isOptimumLoading} label="Optimum Users" onClick={(e)=>showOptimumUsers(e, options.rowData)} />
                     <OverlayPanel className='optimum-users-container' ref={optimumUsersRef}>
                         {
                             (optimumUsers && optimumUsers.length > 0)

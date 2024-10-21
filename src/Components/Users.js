@@ -16,6 +16,7 @@ import { Button } from 'primereact/button';
 import { addSkill, refreshTokenFn, updateUser, verifyToken } from '../apiCalls';
 import { toast } from 'react-toastify';
 import { FloatLabel } from 'primereact/floatlabel';
+import { Checkbox } from 'primereact/checkbox';
 
 export default function Users() {
     const {accessToken, setAccessToken, refreshToken, setIsLoggedIn, users, setUsers, skills, setSkills} = useContext(context);
@@ -29,7 +30,7 @@ export default function Users() {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS }
     });
 
-    const searchBar = () => {
+    function searchBar(){
         return (
             <div className='search-add-skill-container'>
                 <IconField iconPosition="left">
@@ -42,7 +43,7 @@ export default function Users() {
         );
     };
 
-    const onSearchChange = (e) => {
+    function onSearchChange(e){
         const value = e.target.value;
         let _filters = { ...filters };
 
@@ -52,9 +53,19 @@ export default function Users() {
         setSearch(value);
     };
 
+    function checkboxEditor(options){
+        return (
+            <Checkbox
+                onChange={(e) => options.editorCallback(e.target.checked)}
+                checked={options.value}
+            ></Checkbox>
+        )
+    }
+
     function multiselectEditor(options){
         return (
             <MultiSelect
+                className='multiselect-input'
                 value={options.value}
                 onChange={(e) => options.editorCallback(e.target.value)}
                 options={skillsOptions}
@@ -62,6 +73,10 @@ export default function Users() {
             />
         )
     }
+
+    const textEditor = (options) => {
+        return <InputText className='text-input' type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+    };
     
     const skillsBodyTemplate = (users) => {
         return (
@@ -188,7 +203,7 @@ export default function Users() {
                 dataKey="id"
                 onRowEditComplete={onRowEditComplete}
                 filters={filters}
-                globalFilterFields={['name', 'email', 'address', 'phone', 'Active', 'Default', 'skills_str']}
+                globalFilterFields={['name', 'email', 'address', 'phone', 'is_active', 'skills_str']}
                 header={()=>searchBar()}
                 emptyMessage="No users found."
                 showGridlines
@@ -201,10 +216,9 @@ export default function Users() {
                 editMode='row'>
                 <Column field="name" sortable header="Name"></Column>
                 <Column field="email" sortable header="Email"></Column>
-                <Column field="address" sortable header="Address"></Column>
+                <Column field="address" editor={textEditor} sortable header="Address"></Column>
                 <Column field="phone" sortable header="Phone"></Column>
-                <Column field="active" sortable header="Active"></Column>
-                <Column field="default" sortable header="Default"></Column>
+                <Column field="is_active" editor={checkboxEditor} body={(options)=><p>{options.is_active ? "Yes" : "No"}</p>} sortable header="Active"></Column>
                 <Column field="skills_str" header="Skills" editor={multiselectEditor} body={skillsBodyTemplate}></Column>
                 <Column rowEditor header="Edit" bodyStyle={{ textAlign: 'center' }}></Column>
             </DataTable>
