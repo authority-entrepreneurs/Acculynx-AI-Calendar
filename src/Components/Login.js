@@ -95,7 +95,7 @@ export default function Login() {
                     </div>
                     
                     <div className="login-button-container">
-                        <Button className='input-container' label="Log in" icon="pi pi-arrow-right" iconPos="right" loading={isLoading} rounded onClick={login}/>
+                        <Button className='input-container button' label="Log in" icon="pi pi-arrow-right" iconPos="right" loading={isLoading} rounded onClick={login}/>
                     </div>
                 </Card>
             </div>

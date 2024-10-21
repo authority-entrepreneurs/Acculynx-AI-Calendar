@@ -48,3 +48,43 @@
 .error{
     color: #e24c4c;
 }
+
+@media (max-width: 480px) {
+    .login-card-container{
+        width: 90%;
+    }
+
+    .login-text{
+        font-size: 1.2rem;
+        margin: .5rem;
+    }
+
+    .input-container{
+        width: 95%;
+    }
+
+    .login-cred-container,
+    .login-button-container{
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .login-card-container{
+        width: 90%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .login-card-container{
+        width: 50%;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .login-card-container{
+        width: 40%;
+    }
+}

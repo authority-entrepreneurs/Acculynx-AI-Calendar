@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-const apiUrl = "http://52.202.138.76";
+const apiUrl = "https://aidispatch.newrevmachine.com";
 
 async function sendRequest(endpoint , method, body, header){
     let fetchObj = {

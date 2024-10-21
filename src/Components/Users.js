@@ -37,7 +37,7 @@ export default function Users() {
                     <InputText className='search-bar-input' value={seach} onChange={onSearchChange} placeholder="Search" />
                 </IconField>
 
-                <Button label="Skill" icon="pi pi-plus" size="small" onClick={()=>setShowAddSkillDialog(true)}/>
+                <Button className='button' label="Skill" icon="pi pi-plus" size="small" onClick={()=>setShowAddSkillDialog(true)}/>
             </div>
         );
     };

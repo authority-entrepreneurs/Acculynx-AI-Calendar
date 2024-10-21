@@ -33,3 +33,183 @@
 .add-skill-container .p-dialog-content > .p-float-label > .p-inputtext{
     width: 100%;
 }
+
+
+
+
+
+@media (max-width: 480px) {
+    .search-bar-input{
+        padding: 4px 4px 4px 30px;
+    }
+
+    .button{
+        padding: 4px 10px;
+    }
+
+    .p-datatable-header,
+    th,
+    td{
+        padding: .4rem;
+    }
+
+    .p-component{
+        font-size: .6rem;
+    }
+
+    svg {
+        width: 8px;
+        height: 8px;
+    }
+
+    .search-add-skill-container .search-bar-input{
+        width: 100%;
+    }
+
+    .p-paginator-bottom{
+        padding: .3rem .6rem;
+    }
+    
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator > *{
+        min-width: 1.5rem;
+        height: 1.5rem;
+        font-size: .6rem;
+    }
+    
+    .p-paginator-bottom .p-dropdown > span{
+        padding: .3rem 0 .3rem .3rem;
+        font-size: .6rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .search-bar-input{
+        padding: 6px 6px 6px 30px;
+    }
+
+    .button{
+        padding: 6px 10px;
+    }
+
+    .p-datatable-header,
+    th,
+    td{
+        padding: .6rem;
+    }
+
+    .p-component{
+        font-size: .7rem;
+    }
+
+    svg {
+        width: 10px;
+        height: 10px;
+    }
+
+    .search-add-skill-container .search-bar-input{
+        width: 90%;
+    }
+
+    .p-paginator-bottom{
+        padding: .3rem .7rem;
+    }
+    
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator > *{
+        min-width: 1.5rem;
+        height: 1.5rem;
+        font-size: .6rem;
+    }
+    
+    .p-paginator-bottom .p-dropdown > span{
+        padding: .3rem 0 .3rem .3rem;
+        font-size: .7rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .search-bar-input{
+        padding: 8px 8px 8px 30px;
+    }
+
+    .button{
+        padding: 8px 12px;
+    }
+
+    .p-datatable-header,
+    th,
+    td{
+        padding: .6rem;
+    }
+
+    .p-component{
+        font-size: .7rem;
+    }
+
+    svg {
+        width: 10px;
+        height: 10px;
+    }
+
+    .search-add-skill-container .search-bar-input{
+        width: 80%;
+    }
+
+    .p-paginator-bottom{
+        padding: .4rem .8rem;
+    }
+    
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator > *{
+        min-width: 2rem;
+        height: 2rem;
+        font-size: .7rem;
+    }
+    
+    .p-paginator-bottom .p-dropdown > span{
+        padding: .5rem 0 .5rem .5rem;
+        font-size: .7rem;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .search-bar-input{
+        padding: 10px 10px 10px 35px;
+    }
+
+    .button{
+        padding: 10px 16px;
+    }
+
+    .p-datatable-header,
+    th,
+    td{
+        padding: .9rem;
+    }
+
+    .p-component{
+        font-size: .9rem;
+    }
+    
+    .search-add-skill-container .search-bar-input{
+        width: 70%;
+    }
+    
+    .p-paginator-bottom{
+        padding: .5rem .9rem;
+    }
+    
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator .p-dropdown,
+    .p-dropdown .p-dropdown-trigger{
+        min-width: 2.5rem;
+        height: 2.5rem;
+        font-size: .9rem;
+    }
+
+    .p-paginator-bottom .p-dropdown > span{
+        padding: .5rem 0 .5rem .5rem;
+        font-size: .9rem;
+    }
+}

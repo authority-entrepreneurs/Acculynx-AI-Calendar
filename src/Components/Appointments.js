@@ -189,7 +189,7 @@ export default function Appointments() {
                     <InputText className='search-bar-input' value={seach} onChange={onSearchChange} placeholder="Search" />
                 </IconField>
 
-                <Button label="Log out" icon="pi pi-sign-out" size="small" onClick={logout}/>
+                <Button className='button' label="Log out" icon="pi pi-sign-out" size="small" onClick={logout}/>
             </div>
         );
     };
