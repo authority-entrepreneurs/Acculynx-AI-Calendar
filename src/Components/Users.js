@@ -17,9 +17,21 @@ import { addSkill, refreshTokenFn, updateUser, verifyToken } from '../apiCalls';
 import { toast } from 'react-toastify';
 import { FloatLabel } from 'primereact/floatlabel';
 import { Checkbox } from 'primereact/checkbox';
+import { Dropdown } from 'primereact/dropdown';
 
 export default function Users() {
-    const {accessToken, setAccessToken, refreshToken, setIsLoggedIn, users, setUsers, skills, setSkills} = useContext(context);
+    const {
+        accessToken,
+        setAccessToken,
+        refreshToken,
+        setIsLoggedIn,
+        users,
+        setUsers,
+        skills,
+        setSkills,
+        locations,
+        selectedLocation,
+        setSelectedLocation} = useContext(context);
     const [seach, setSearch] = useState("");
     const [isLoading, setIsLoading] = useState({text: "", visible: false});
     const [skillsOptions, setSkillsOptions] = useState();
@@ -27,21 +39,46 @@ export default function Users() {
     const [showAddSkillDialog, setShowAddSkillDialog] = useState(false);
     const [isAddSkillLoading, setIsAddSkillLoading] = useState(false);
     const [filters, setFilters] = useState({
-        global: { value: null, matchMode: FilterMatchMode.CONTAINS }
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        location_id: { value: null, matchMode: FilterMatchMode.EQUALS }
     });
 
     function searchBar(){
         return (
-            <div className='search-add-skill-container'>
-                <IconField iconPosition="left">
-                    <InputIcon className="pi pi-search" />
-                    <InputText className='search-bar-input' value={seach} onChange={onSearchChange} placeholder="Search" />
-                </IconField>
+            <div>
+                <div className='search-add-skill-container'>
+                    <IconField iconPosition="left">
+                        <InputIcon className="pi pi-search" />
+                        <InputText className='search-bar-input' value={seach} onChange={onSearchChange} placeholder="Search" />
+                    </IconField>
 
-                <Button className='button' label="Skill" icon="pi pi-plus" size="small" onClick={()=>setShowAddSkillDialog(true)}/>
+                    <Dropdown
+                        value={selectedLocation}
+                        optionLabel="location_name"
+                        optionValue="locationId"
+                        options={locations}
+                        onChange={locationFilterChange}
+                        placeholder="Filter by location"
+                        className='dropdown-input'
+                        showClear/>
+                </div>
+
+                <div className='add-skill-button-container'>
+                    <Button className='button' label="Skill" icon="pi pi-plus" size="small" onClick={()=>setShowAddSkillDialog(true)}/>
+                </div>
             </div>
         );
     };
+
+    function locationFilterChange(e){
+        const value = e.target.value;
+        let _filters = { ...filters };
+
+        _filters['location_id'].value = value;
+
+        setFilters(_filters);
+        setSelectedLocation(value);
+    }
 
     function onSearchChange(e){
         const value = e.target.value;

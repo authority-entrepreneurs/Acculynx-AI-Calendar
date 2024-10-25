@@ -21,6 +21,9 @@ function App() {
   const [appointments, setAppointments] = useState([]);
   const [users, setUsers] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [calendars, setCalendars] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
 
   function logout(){
     secureLocalStorage.removeItem('email');
@@ -64,6 +67,12 @@ function App() {
       setUsers,
       skills,
       setSkills,
+      calendars,
+      setCalendars,
+      locations,
+      setLocations,
+      selectedLocation,
+      setSelectedLocation,
       logout
     }}>
       <div className="App">

@@ -35,6 +35,13 @@
 }
 
 
+.add-skill-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: .5rem 0 0 0;
+}
+
 
 
 

@@ -28,6 +28,12 @@ div[data-pc-section="panelcontainer"]{
     gap: .5rem;
 }
 
+.log-out-container{
+    margin: 0 .5rem 0 auto;
+    display: flex;
+    align-items: center;
+}
+
 
 
 

@@ -136,6 +136,46 @@ async function getOptimumUsers(accessToken, payload, callbackFn){
     }
 }
 
+async function getCalendars(accessToken, callbackFn){
+    try{
+        const resp = await sendRequest("/api/app/calendars/", "GET", null, {'Authorization' : 'Bearer ' + accessToken});
+        callbackFn(resp);
+    } catch(err){
+        console.log(err);
+        toast.error("Something went wrong! Please try after some time");
+    }
+}
+
+async function updateCalendar(id, accessToken, payload, callbackFn){
+    try{
+        const resp = await sendRequest(`/api/app/calendars/${id}/`, "PUT", payload, {'Authorization' : 'Bearer ' + accessToken});
+        callbackFn(resp);
+    } catch(err){
+        console.log(err);
+        toast.error("Something went wrong! Please try after some time");
+    }
+}
+
+async function deleteCalendar(id, accessToken, callbackFn){
+    try{
+        const resp = await sendRequest(`/api/app/calendars/${id}/`, "DELETE", null, {'Authorization' : 'Bearer ' + accessToken});
+        callbackFn(resp);
+    } catch(err){
+        console.log(err);
+        toast.error("Something went wrong! Please try after some time");
+    }
+}
+
+async function getLocations(accessToken, callbackFn){
+    try{
+        const resp = await sendRequest("/api/app/locations/", "GET", null, {'Authorization' : 'Bearer ' + accessToken});
+        callbackFn(resp);
+    } catch(err){
+        console.log(err);
+        toast.error("Something went wrong! Please try after some time");
+    }
+}
+
 export {
     getToken,
     refreshTokenFn,
@@ -147,5 +187,9 @@ export {
     updateAppointment,
     deleteAppointment,
     updateUser,
-    getOptimumUsers
+    getOptimumUsers,
+    getCalendars,
+    updateCalendar,
+    deleteCalendar,
+    getLocations
 }

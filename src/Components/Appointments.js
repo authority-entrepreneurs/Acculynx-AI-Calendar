@@ -15,19 +15,29 @@ import { deleteAppointment, getOptimumUsers, refreshTokenFn, updateAppointment, 
 import { context } from '../App';
 import { toast } from 'react-toastify';
 import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
 
 export default function Appointments() {
     const optimumUsersRef = useRef(null);
-    const {accessToken, setAccessToken, refreshToken, setIsLoggedIn, appointments, setAppointments, users, logout} = useContext(context);
-    const [seach, setSearch] = useState("");
+    const {
+        accessToken,
+        setAccessToken,
+        refreshToken,
+        setIsLoggedIn,
+        appointments,
+        setAppointments,
+        users,
+        locations,
+        selectedLocation,
+        setSelectedLocation} = useContext(context);
+    const [search, setSearch] = useState("");
     const [userNames, setUserNames] = useState([]);
     const [isLoading, setIsLoading] = useState({text: "", visible: false});
     const [optimumUsers, setOptimumUsers] = useState();
     const [isOptimumLoading, setIsOptimumLoading] = useState(false);
 
     const [filters, setFilters] = useState({
-        global: { value: null, matchMode: FilterMatchMode.CONTAINS }
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        locationId: { value: null, matchMode: FilterMatchMode.EQUALS }
     });
 
     function showOptimumUsers(e, rowData){
@@ -181,18 +191,36 @@ export default function Appointments() {
         });
     }
 
-    const searchBar = () => {
+    function searchBar(){
         return (
             <div className='search-add-skill-container'>
                 <IconField iconPosition="left">
                     <InputIcon className="pi pi-search" />
-                    <InputText className='search-bar-input' value={seach} onChange={onSearchChange} placeholder="Search" />
+                    <InputText className='search-bar-input' value={search} onChange={onSearchChange} placeholder="Search" />
                 </IconField>
 
-                <Button className='button' label="Log out" icon="pi pi-sign-out" size="small" onClick={logout}/>
+                <Dropdown
+                    value={selectedLocation}
+                    optionLabel="location_name"
+                    optionValue="locationId"
+                    options={locations}
+                    onChange={locationFilterChange}
+                    placeholder="Filter by location"
+                    className='dropdown-input'
+                    showClear/>
             </div>
         );
     };
+
+    function locationFilterChange(e){
+        const value = e.target.value;
+        let _filters = { ...filters };
+
+        _filters['locationId'].value = value;
+
+        setFilters(_filters);
+        setSelectedLocation(value);
+    }
 
     const onSearchChange = (e) => {
         const value = e.target.value;
@@ -207,7 +235,7 @@ export default function Appointments() {
     const textEditor = (options) => {
         return <InputText className='text-input' type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
     };
-
+    
     const dropdownEditor = (options) => {
         return (
             <div className='assigned-optimum-users-container'>
