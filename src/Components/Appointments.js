@@ -298,6 +298,10 @@ export default function Appointments() {
         setUserNames([...temp]);
     },[users]);
 
+    useEffect(()=>{
+        setSelectedLocation();
+    },[]);
+
     return (
         <div className='appointments'>
             <DataTable

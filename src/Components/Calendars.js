@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../Styles/Calendars.css';
 import { DataTable } from 'primereact/datatable';
 import { FilterMatchMode } from 'primereact/api';
@@ -222,6 +222,10 @@ export default function Calendars() {
             ></Checkbox>
         )
     }
+
+    useEffect(()=>{
+        setSelectedLocation();
+    },[]);
     
     return (
         <div className="calendars">

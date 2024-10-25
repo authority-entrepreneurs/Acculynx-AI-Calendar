@@ -231,7 +231,11 @@ export default function Users() {
             return skill.name;
         });
         setSkillsOptions([...temp]);
-    },[skills])
+    },[skills]);
+
+    useEffect(()=>{
+        setSelectedLocation();
+    },[]);
 
     return (
         <div className="users">
