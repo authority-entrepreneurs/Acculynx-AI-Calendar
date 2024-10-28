@@ -11,7 +11,7 @@ import { Column } from 'primereact/column';
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from 'primereact/checkbox';
-import { deleteCalendar, refreshTokenFn, updateCalendar, verifyToken } from '../apiCalls';
+import { addCalendar, deleteCalendar, refreshTokenFn, updateCalendar, verifyToken } from '../apiCalls';
 import { Dialog } from 'primereact/dialog';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { toast } from 'react-toastify';
@@ -30,6 +30,15 @@ export default function Calendars() {
 
     const [isLoading, setIsLoading] = useState({text: "", visible: false});
     const [search, setSearch] = useState("");
+    const [showAddCalendarDialog, setShowAddCalendarDialog] = useState(false);
+    const [addCalendarData, setAddCalendarData] = useState({
+        calendar_id: "",
+        location_id: "",
+        name: "",
+        calendar_type: "",
+        is_active: false,
+        isLoading: false
+    });
 
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -131,6 +140,61 @@ export default function Calendars() {
         });
     }
 
+    function addCalendarFn(){
+        if(addCalendarData.calendar_id && addCalendarData.location_id && addCalendarData.name && addCalendarData.calendar_type && addCalendarData.is_active){
+            const {isLoading, ...payload} = addCalendarData;
+            setAddCalendarData({...addCalendarData, "isLoading": true});
+            
+            function add(token){
+                addCalendar(token, payload, async (resp)=>{
+                    if(resp.ok){
+                        setCalendars([...calendars, payload]);
+                        setAddCalendarData({
+                            calendar_id: "",
+                            location_id: "",
+                            name: "",
+                            calendar_type: "",
+                            is_active: false,
+                            isLoading: false
+                        });
+                        toast.success("Added.");
+                    }
+                    else{
+                        const {detail} = await resp.json();
+                        toast.error("Failed to add");
+                        console.log(detail, "while Adding calendar");
+                        setAddCalendarData({...addCalendarData, "isLoading": false});
+                    }
+                })
+            }
+            
+            verifyToken(accessToken, async (resp)=>{
+                if(resp.ok){
+                    add(accessToken);
+                }
+                else{
+                    refreshTokenFn(refreshToken, async (resp)=>{
+                        if(resp.ok){
+                            const {access} = await resp.json();
+                            setAccessToken(access);
+                            add(access);
+                        }
+                        else{
+                            setAddCalendarData({...addCalendarData, "isLoading": false});
+                            toast.error("Failed to add");
+                            const {detail} = await resp.json();
+                            console.log(detail, "while refreshing the token");
+                            setIsLoggedIn(false);
+                        }
+                    })
+                }
+            });
+        }
+        else{
+            toast.error("Please fill all the fields");
+        }
+    }
+
     function locationFilterChange(e){
         const value = e.target.value;
         let _filters = { ...filters };
@@ -153,21 +217,27 @@ export default function Calendars() {
 
     function searchBar(){
         return (
-            <div className='search-add-skill-container'>
-                <IconField iconPosition="left">
-                    <InputIcon className="pi pi-search" />
-                    <InputText className='search-bar-input' value={search} onChange={onSearchChange} placeholder="Search" />
-                </IconField>
-                
-                <Dropdown
-                    value={selectedLocation}
-                    optionLabel="location_name"
-                    optionValue="locationId"
-                    options={locations}
-                    onChange={locationFilterChange}
-                    placeholder="Filter by location"
-                    className='dropdown-input'
-                    showClear/>
+            <div>
+                <div className='search-add-skill-container'>
+                    <IconField iconPosition="left">
+                        <InputIcon className="pi pi-search" />
+                        <InputText className='search-bar-input' value={search} onChange={onSearchChange} placeholder="Search" />
+                    </IconField>
+                    
+                    <Dropdown
+                        value={selectedLocation}
+                        optionLabel="location_name"
+                        optionValue="locationId"
+                        options={locations}
+                        onChange={locationFilterChange}
+                        placeholder="Filter by location"
+                        className='dropdown-input'
+                        showClear/>
+                </div>
+
+                <div className='add-skill-button-container'>
+                    <Button className='button' label="Calendar" icon="pi pi-plus" size="small" onClick={()=>setShowAddCalendarDialog(true)}/>
+                </div>
             </div>
         );
     };
@@ -222,10 +292,6 @@ export default function Calendars() {
             ></Checkbox>
         )
     }
-
-    useEffect(()=>{
-        setSelectedLocation();
-    },[]);
     
     return (
         <div className="calendars">
@@ -259,6 +325,28 @@ export default function Calendars() {
             <div>
                 <Dialog className='loading-dialog' draggable={false} resizable={false} header={isLoading.text} visible={isLoading.visible} modal style={{ width: '20rem' }}>
                     <ProgressSpinner style={{display: 'block', width: '50px', height: '50px', margin: '0 auto'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
+                </Dialog>
+            </div>
+
+            <div>
+                <Dialog className='add-skill-container' draggable={false} resizable={false} visible={showAddCalendarDialog} onHide={() => setShowAddCalendarDialog(false)} modal style={{ width: '25rem' }}>
+                    <InputText placeholder='Calendar ID' value={addCalendarData.calendar_id} onChange={(e)=>setAddCalendarData({...addCalendarData, "calendar_id" : e.target.value})}/>
+                    <InputText placeholder='Location ID' value={addCalendarData.location_id} onChange={(e)=>setAddCalendarData({...addCalendarData, "location_id" : e.target.value})}/>
+                    <InputText placeholder='Name' value={addCalendarData.name} onChange={(e)=>setAddCalendarData({...addCalendarData, "name" : e.target.value})}/>
+                    <Dropdown
+                        value={addCalendarData.calendar_type}
+                        onChange={(e)=>setAddCalendarData({...addCalendarData, "calendar_type" : e.target.value})}
+                        options={["round_robin", "event", "class_booking", "collective", "service_booking"]}
+                        placeholder="Calendar Type"
+                        className='dropdown-input'
+                    />
+
+                    <div>
+                        <label htmlFor="is_active">Is Active </label>
+                        <Checkbox id='is_active' onChange={(e)=>setAddCalendarData({...addCalendarData, "is_active" : e.target.checked})} checked={addCalendarData.is_active}></Checkbox>
+                    </div>
+
+                    <Button loading={addCalendarData.isLoading} onClick={addCalendarFn} label='Add' />
                 </Dialog>
             </div>
         </div>

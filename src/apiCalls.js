@@ -136,6 +136,16 @@ async function getOptimumUsers(accessToken, payload, callbackFn){
     }
 }
 
+async function addCalendar(accessToken, payload, callbackFn){
+    try{
+        const resp = await sendRequest("/api/app/calendars/", "POST", payload, {'Authorization' : 'Bearer ' + accessToken});
+        callbackFn(resp);
+    } catch(err){
+        console.log(err);
+        toast.error("Something went wrong! Please try after some time");
+    }
+}
+
 async function getCalendars(accessToken, callbackFn){
     try{
         const resp = await sendRequest("/api/app/calendars/", "GET", null, {'Authorization' : 'Bearer ' + accessToken});
@@ -191,5 +201,6 @@ export {
     getCalendars,
     updateCalendar,
     deleteCalendar,
-    getLocations
+    getLocations,
+    addCalendar
 }
